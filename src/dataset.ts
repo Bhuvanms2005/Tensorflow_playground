@@ -14,6 +14,7 @@ limitations under the License.
 ==============================================================================*/
 
 import * as d3 from 'd3';
+import {BANKNOTE_DATA} from './banknote-data';
 
 /**
  * A two dimensional example: x and y coordinates with the label.
@@ -30,25 +31,25 @@ type Point = {
 };
 
 /**
+ * Real-world classification dataset: UCI "Banknote Authentication"
+ * (https://archive.ics.uci.edu/dataset/267/banknote+authentication).
+ *
+ * Unlike the synthetic generators below, this is fixed, pre-processed data
+ * (see prepare_banknote.js / src/banknote-data.ts), so `numSamples` and
+ * `noise` are accepted for a consistent DataGenerator signature but ignored.
+ * x = scaled "variance", y = scaled "skewness",
+ * label = -1 (genuine banknote) | 1 (forged banknote).
+ */
+export function classifyBanknoteData(
+    numSamples: number, noise: number): Example2D[] {
+  // Return a copy so callers can freely mutate/shuffle it.
+  return BANKNOTE_DATA.map(d => ({x: d.x, y: d.y, label: d.label}));
+}
+
+/**
  * Shuffles the array using Fisher-Yates algorithm. Uses the seedrandom
  * library as the random generator.
  */
-let banknoteData: Example2D[] = [];
-let banknoteLoaded = false;
-
-export function setBanknoteData(data: Example2D[]): void {
-  banknoteData = data;
-  banknoteLoaded = true;
-}
-
-export function classifyBanknoteData(
-    numSamples: number, noise: number): Example2D[] {
-  if (!banknoteLoaded) {
-    return [];
-  }
-
-  return banknoteData.slice();
-}
 export function shuffle(array: any[]): void {
   let counter = array.length;
   let temp = 0;

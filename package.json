@@ -1,9 +1,10 @@
 {
-  "name": "deep-playground-prototype",
-  "version": "2016.3.10",
-  "description": "",
+  "name": "banknote-authentication-playground",
+  "version": "1.0.0",
+  "description": "TensorFlow Neural Network Playground, adapted to classify real banknote authentication data.",
   "private": true,
   "scripts": {
+    "prep-data": "node prepare_banknote.js",
     "clean": "rimraf dist",
     "start": "npm run serve-watch",
     "prep": "copyfiles analytics.js dist && concat node_modules/material-design-lite/material.min.js node_modules/seedrandom/seedrandom.min.js > dist/lib.js",
