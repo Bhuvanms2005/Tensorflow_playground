@@ -33,6 +33,22 @@ type Point = {
  * Shuffles the array using Fisher-Yates algorithm. Uses the seedrandom
  * library as the random generator.
  */
+let banknoteData: Example2D[] = [];
+let banknoteLoaded = false;
+
+export function setBanknoteData(data: Example2D[]): void {
+  banknoteData = data;
+  banknoteLoaded = true;
+}
+
+export function classifyBanknoteData(
+    numSamples: number, noise: number): Example2D[] {
+  if (!banknoteLoaded) {
+    return [];
+  }
+
+  return banknoteData.slice();
+}
 export function shuffle(array: any[]): void {
   let counter = array.length;
   let temp = 0;
